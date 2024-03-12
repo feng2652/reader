@@ -39,8 +39,12 @@ def get_title_and_url(soup):
         else:
             match = re.search(pattern, content)
             if match:
-                live_url = match.group(1)
-    print(title, live_url)
+                live_url = match.group(1).strip()
+            else:
+                match = re.search(r'(https://ffdced10e5f6.us-west-2.playback.live-video.net(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+)',content)
+                if match:
+                    live_url = match.group(1).strip()
+    # print(title, live_url)
     return title, live_url
 
 def main():
@@ -101,6 +105,13 @@ def main():
         with open("./wzaz259/pandaTV.txt", 'w', encoding='utf-8') as f:
             for item in playlist:
                 f.write(f"{item['title']},{item['live_url']}\n")
+        with open(r'./wzaz259/pandaTV.m3u', 'w', encoding='utf-8') as w:
+            w.write('#EXTM3U\n')
+            for item in playlist:
+                username = item['title']
+                hls_playlist = item['live_url']
+                w.write('#EXTINF:-1 ,' + username + '\n')
+                w.write(hls_playlist + '\n')
          # 将结果写入文件
         with open("./wzaz259/playlist.txt", 'a', encoding='utf-8') as f:
             f.write("pandaTV,#genre#\n")
