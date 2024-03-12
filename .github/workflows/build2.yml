@@ -1,0 +1,32 @@
+name: build-list
+on:
+  workflow_dispatch:
+#   schedule:
+#     # IMPORTANT: Set cron job in UTC timezone
+#     - cron:  '0/10 * * * *'
+
+jobs:
+  run-python-script:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9.16'
+      - run: pip install requests
+      - run: pip install beautifulsoup4
+      - run: python ./.github/workflows/script/py1.py
+      - run: python ./.github/workflows/script/py2.py
+      
+          
+      - name: Pushes test file
+        uses: antoineVIVIES/copy_file_to_another_repo_action@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source_files: ${{ secrets.SOURCEFILES }}
+          destination_repo: ${{ secrets.REPO }}
+          user_email: 'example@email.com'
+          user_name: ${{ secrets.USERNAME }}
+          commit_message: 'A custom message for the commit'
+          destination_branch: 'dev'
