@@ -98,11 +98,11 @@ def main():
                     print(f"Error occurred while fetching data from '{url}': {exc}")
 
         # 将结果写入文件
-        with open("pandaTV.txt", 'w', encoding='utf-8') as f:
+        with open("./wzaz259/pandaTV.txt", 'w', encoding='utf-8') as f:
             for item in playlist:
                 f.write(f"{item['title']},{item['live_url']}\n")
          # 将结果写入文件
-        with open("playlist.txt", 'a', encoding='utf-8') as f:
+        with open("./wzaz259/playlist.txt", 'a', encoding='utf-8') as f:
             f.write("pandaTV,#genre#\n")
             for item in playlist:
                 f.write(f"{item['title']},{item['live_url']}\n")
