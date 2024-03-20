@@ -16,7 +16,7 @@ jobs:
       - run: pip install requests
       - run: pip install beautifulsoup4
       - run: python ./.github/workflows/scrcpy/py1.py
-      - run: python ./.github/workflows/scrcpy/py2.py
+      # - run: python ./.github/workflows/scrcpy/py2.py
       
           
       - name: Pushes test file
