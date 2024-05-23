@@ -2,7 +2,7 @@
 import requests
 import os,json,time
 
-url='https://zh.stripchat.com/api/front/models?limit=600&offset=0&primaryTag=girls&filterGroupTags=[["tagLanguageChinese"]]&sortBy=stripRanking&parentTag=ethnicityAsian&userRole=guest'
+url='https://zh.stripchat.com/api/front/models?limit=99&offset=0&primaryTag=girls&filterGroupTags=[["tagLanguageChinese"]]&sortBy=stripRanking&parentTag=ethnicityAsian&userRole=guest'
 r = requests.get(url)
 play = r.json()['models']
 play = sorted(play, key=lambda p:p['viewersCount'], reverse=True)
